@@ -1,6 +1,9 @@
 # Neural-Network-Antivirus
-Another rewrite of my CS 2550 anti-virus, this time to use a neural network.
+
+The next step I took in experimenting with AV and machine learning, following the KNN model, was building a neural network.
 
 Based on TensorFlow's binary classification tutorial.
 
-Relatively sloppy, but functional.
+Not fully functional, but the mistakes I made in this will help in my next attempt.
+
+[CITE TENSORFLOW TUTORIAL HERE]

@@ -21,12 +21,12 @@ from tensorflow import keras
 from tensorflow.python.data import Dataset
 from random import shuffle
 
-#samples_dataframe = pd.read_csv("NNAVData", sep=',')
+samples_dataframe = pd.read_csv("NNAVData", sep=',')
 #print(samples_dataframe)
 #print(type(samples_dataframe))
 
-#samples_dataframe = samples_dataframe.reindex(np.random.permutation(samples_dataframe.index))
-#print(samples_dataframe)
+samples_dataframe = samples_dataframe.reindex(np.random.permutation(samples_dataframe.index))
+print(samples_dataframe)
 
 samples = []
 labels = []
@@ -59,11 +59,11 @@ for z in range(len(labels)):
 #print(samples)
 
 
-#print(samples)
-#print(labels)
+print(samples)
+print(labels)
 
-#print("Number of samples: " + str(len(samples)))
-#print("Number of labels: " + str(len(labels)))
+print("Number of samples: " + str(len(samples)))
+print("Number of labels: " + str(len(labels)))
 #print(type(samples[2][2]))
 
 #from keras.preprocessing.text import Tokenizer
