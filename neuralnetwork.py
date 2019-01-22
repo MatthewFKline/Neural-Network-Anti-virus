@@ -59,8 +59,8 @@ for z in range(len(labels)):
 #print(samples)
 
 
-print(samples)
-print(labels)
+#print(samples)
+#print(labels)
 
 print("Number of samples: " + str(len(samples)))
 print("Number of labels: " + str(len(labels)))
@@ -119,6 +119,7 @@ model.compile(optimizer=tf.train.AdamOptimizer(), loss="binary_crossentropy", me
 results = model.evaluate(test_data, test_labels)
 
 print("printing results")
+print(model.metrics_names)
 print(results)
 
 
