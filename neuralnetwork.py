@@ -101,6 +101,8 @@ model = keras.Sequential()
 model.add(keras.layers.Embedding(20000000, 16))
 model.add(keras.layers.GlobalAveragePooling1D())
 model.add(keras.layers.Dense(16, activation=tf.nn.relu))
+model.add(keras.layers.Dense(16, activation=tf.nn.relu))
+model.add(keras.layers.Dense(16, activation=tf.nn.relu))
 model.add(keras.layers.Dense(1, activation=tf.nn.sigmoid))
 
 model.summary()
@@ -115,10 +117,9 @@ partial_y_train = train_labels[256:]
 
 #history = model.fit(partial_x_train, partial_y_train, epochs=40, batch_size=512, validation_data=(x_val, y_val), verbose=1)
 
-model.fit(partial_x_train, partial_y_train, epochs=10, batch_size=512, validation_data=(x_val, y_val), verbose=2)
+model.fit(partial_x_train, partial_y_train, epochs=100, batch_size=256, validation_data=(x_val, y_val), verbose=2)
 
 #print(test_data)
-print("Wat")
 
 results = model.evaluate(test_data, test_labels)
 
