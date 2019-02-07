@@ -1,13 +1,9 @@
 #!/usr/bin/python3
 
+#==============================================================================
+#IMPORTS
 
 from __future__ import print_function
-
-
-# Just disables the warning, doesn't enable AVX/FMA
-import os
-os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-
 import math
 import csv
 from IPython import display
@@ -22,6 +18,16 @@ from tensorflow import keras
 from tensorflow.python.data import Dataset
 from random import shuffle
 
+# Just disables the warning, doesn't enable AVX/FMA
+# NGL - I have no idea what that means, but I'm not about to touch this until I find out
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
+
+
+#==============================================================================
+#INPUT DATA
+
+
 samples_dataframe = pd.read_csv("NNAVData", sep=',')
 
 samples_dataframe = samples_dataframe.reindex(np.random.permutation(samples_dataframe.index))
@@ -33,6 +39,9 @@ labels = []
 with open("NNAVData", 'r') as f:
 	reader = csv.reader(f)
 	samples = list(reader)
+
+#==============================================================================
+#PREPARE DATA
 
 shuffle(samples)
 
@@ -62,7 +71,8 @@ test_data = np.asarray(test_data)
 test_data = keras.preprocessing.sequence.pad_sequences(test_data)
 test_labels = labels[4000:]
 
-factors = 256
+#==============================================================================
+#CONSTRUCT MODEL
 
 model = keras.Sequential()
 #Reducing embedding size reduces RAM requirements
@@ -81,6 +91,9 @@ model.add(keras.layers.Dense(1, activation=tf.nn.sigmoid))
 
 model.summary()
 
+#==============================================================================
+#ACTIVATE MODEL
+
 model.compile(optimizer=tf.train.AdamOptimizer(), loss="binary_crossentropy", metrics=["accuracy"])
 
 x_val = train_data[:256]
@@ -92,6 +105,9 @@ partial_y_train = train_labels[256:]
 model.fit(partial_x_train, partial_y_train, epochs=100, batch_size=512, validation_data=(x_val, y_val), verbose=2)
 
 results = model.evaluate(test_data, test_labels)
+
+#==============================================================================
+#RESULTS
 
 print("printing results")
 print(model.metrics_names)
